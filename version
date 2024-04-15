@@ -1,0 +1,63 @@
+/******************************************************************************************
+date    :      20240308
+version :      IECU33_SW060-DriveOs-6090-8295-N_RP6
+update  :
+
+            1. update vmon params
+            2. support fota_sysinfo.json for X and N
+            3. disable kernel key print
+            4. update syslog size to 400M
+            5. rm VSS chip 
+
+******************************************************************************************/   
+/******************************************************************************************
+date    :      20240226
+version :      IECU33_SW060-DriveOs-6090-N_RP5
+update  :
+
+            1. add retry for max96851 ,update retry for display ko, 
+            2. update ddr config
+            3. missing VI clock update with bugid 4389088
+            4. merge from 050:apply 96717(F) errata & x3c errata(disable x3c temp diag) ,merge from 050 :bugfix for 390 camera eeprom calib issue
+            5. add sshd log to syslog
+            6. update resolution for 8295
+
+******************************************************************************************/   
+/******************************************************************************************
+date    :      20240207
+version :      IECU33_SW060-DriveOs-6090-N_RP4
+update  :
+
+            1. Add FSI FW for V9.0.1
+            2. bugfix VSS issue
+            3. update eol tn multicast
+
+******************************************************************************************/   
+/******************************************************************************************
+date    :      20240205
+version :      IECU33_SW060-DriveOs-6090-N_RP3
+update  :
+
+            1. update FSI for 32 channel 
+            2. EOL for PORT B display
+
+
+******************************************************************************************/   
+/******************************************************************************************
+date    :      20240124
+version :      IECU31_SW051-DriveOs-6090-N_RP2
+update  :
+
+            1. update EOL  Multicast for 11 cameras dispaly
+            2. 
+
+
+******************************************************************************************/   
+/******************************************************************************************
+date    :      20231225
+version :      IECU33_SW051-DriveOs-6090-N-RP1
+update  :
+
+            1. frist bringup 
+
+******************************************************************************************/   
