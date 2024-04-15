@@ -1,0 +1,212 @@
+# Copyright (c) 2022-2023, NVIDIA CORPORATION & AFFILIATES.
+# All rights reserved.
+#
+# NVIDIA CORPORATION, its affiliates and its licensors retain all intellectual
+# property and proprietary rights in and to this software, related
+# documentation and any modifications thereto.  Any use, reproduction,
+# disclosure or distribution of this software and related documentation
+# without an express license agreement from NVIDIA CORPORATION or its
+# affiliates is strictly prohibited.
+version 2:
+ - Add image creation support for Linux rfs (Ext images)
+
+version 3:
+ - Update Copytarget to v1.4 to support yaml file lists
+
+version 4:
+ - Update command line options taken by build-kit:
+   - Converted '--create-tar' option from Bool to enum option
+     --create-tar=<option> where 'option' is one of the values
+     in ('yes', 'no')
+   - Removed --skip-img option
+   - Added --create-image option of enum type
+     --create-image=<option> where 'option' is one of the values
+     in ('yes', 'no')
+
+version 5:
+ - Add commandline option to Build-Kit:
+   - Added -w/--nv-workspace option to Build-Kit to define
+     SDK installation paths.
+ - Update copytarget API to use workspace variable
+
+version 6:
+ - Update build-kit to support QNX Filesystem image creation
+
+version 7:
+ - Add Field 'FilesystemType' to QNX CONFIG.json semantics for
+   specifying the type of filesystem to be built
+ - Add commandline option '--copytarget-source-type' for
+   specifying the source to be used by copytarget from the
+   yaml files.
+ - Update API to match copytarget v1.4.1 making use of the value
+   obtained from 'FilesystemType' and 'copytarget-source-type'
+
+version 8:
+ - Support dict value in 'CopyTargets' array in CONFIG.
+ - dict can override default Copytarget arguements in Build-Kit such as:
+   - workspace
+   - source-type
+   - args
+
+version 9:
+ - Add hostname support in configs
+
+version 10:
+ - MANIFEST.json to only contain frozen versions of DebianPackages
+   specified in the CONFIG.json
+ - <output_name>.manifest shall be generated containing all
+   information regarding the Debian packages installed in the
+   filesystem.
+ - Build-Kit shall only install/update the requested packages,
+   and its dependencies, and shall not update the full Base
+   filesystem.
+
+version 11:
+ - Add Image Size support for QNX configs to set final image size
+
+version 12:
+ - MANIFEST.json to contain frozen versions of all DebianPackages
+   in the Linux filesystem image created.
+ - Non-Required fields of CONFIG.json need not be specified in the
+   CONFIG.json. Default values shall be taken if the Field is not
+   present in the CONFIG.
+
+version 13:
+ - MANIFEST.json shall have the name of the image file generated, rather than
+   the name of the CONFIG file used.
+ - Build-Kit to add temporary support for Parent Field in QNX, to enable
+   additional CONFIG files to customise same QNX filesystem image using
+   its MANIFEST.json.
+
+version 14:
+ - Update CONFIG semantics for 'Users' and 'Groups'.
+ - If the user/group already exists in the Base filesystem, user/group details is
+   updated with usermod/groupmod.
+ - Updates Users/Groups field to be dict, maintains backwards compatibility with
+   older array value type.
+
+version 15:
+ - Add support for inputting CONFIG file via STDIN.
+ - Add support for customizing filesystem directory in place.
+ - MANIFEST.json updated to list all fields supported.
+ - Run with the privilege with which the tool was executed.
+   Tool shall not increase privileges internally using 'sudo'.
+ - Add Hashed password support for adding/updating user passwords.
+ - 'Base' Field is coverted from a Required Field to an Optional Field.
+
+version 16:
+ - Add support for ordered dict in mirror section of CONFIG.json files.
+ - In mirror-section-parser add support for Type : local_debian_folder.
+ - Add support of host-folders as local debian mirror.
+ - Add support for dabian packages that contain debs : type debian
+ - Add support for type : local debian mirror
+
+version 17:
+ - Add parallel compression/decompression support
+ - Update Base field to support Build-Kit CONFIG files as values.
+ - Add file system chain building support using the 'Base' field.
+ - Remove Platform dependent encoding, default to 'utf-8'
+
+version 17.0.0:
+ - Renamed Build-Kit to Build-FS
+ - Update versioning from <VERSION_NO> to <MAJOR>.<MINOR>.<PATCH>-<uniqhash>
+
+version 17.0.1:
+ - Update relative paths of copytarget and build-fs in safety environment.
+ - Add NV_BUILD_FS_STRICT_DEP env variable to control BUILD_FS strict
+   dependencies vs minimum dependency versions.
+
+version 17.0.2:
+ - Fix bug which makes host /dev/ read-only, when bind mounting /dev/ to
+   the target.
+ - Fix bug which prevents restoration of apt sources.list when Mirrors
+   entry is empty/None.
+
+version 17.0.3:
+ - Fix bug where local mirror access by apt was failing due to restrictive
+   host umask.
+ - Reduce verbosity of cleanup function.
+
+version 17.1.0:
+ - Add QNX IFS image generation support
+
+version 17.1.1:
+ - Add create_dummy_ssh_host_keys.sh to build-fs debian.
+
+version 17.1.2:
+ - Add more verbosity on error messages and debug logs
+ - Include logging framework into Build-FS
+
+version 17.1.3:
+ - Fix logging issue in chained Build-FS CONFIGs.
+ - Fix Ext4 tree size calculation algorithm to be independent
+   of host filesystem
+
+version 17.1.4:
+ - Add ability to override dpkg-scanpackages' tool path internally
+
+version 17.1.5:
+ - Fix generated argument spacing issue in mkifs call
+ - Show the package with missing Debian in generate_manifest.sh
+
+version 17.1.6:
+ - Add hello-world build-fs Linux config.
+ - Rename nvidia-driveos-build-fs-user-rfs.CONFIG.json to driveos-user-rfs.CONFIG.json
+
+version 17.1.7:
+ - Fix error detection for invalid configs without "OS" and "Output"
+ - Fix error while trying to backup non-existant /etc/apt/sources.list and
+ /etc/resolv.conf
+
+version 17.1.8:
+ - Support for setting custom home directory and shell.
+ - Support to create system users.
+ - The following options have been added to Build-FS to enable the feature to
+   track and manage the size of files in the filesystem:
+    * --generate-target-size-file
+      This option to provides the ability to create a file (in YAML format)
+      containing details pertaining to the sizes of each file in the filesystem.
+    * --size-limits-file
+      This option provides the ability to set limits to the size of files being copied
+      by each module/element to the filesystem. This argument takes a path to the YAML
+      manifest that defines the size limits/threshold values.
+
+version 17.1.9:
+ - Support for SELINUX.
+ - Provides interface for users to hook in SELINUX inputs like setfiles tool,
+ policy file, context file and runs the tool to apply SELINUX attributes to FS.
+
+version 17.1.10:
+ - Support for Mounts, FilesystemInclude and AssociatedFilesystems semantics.
+ - Mounts allows to generate /etc/fstab entries of the requested filesystem.
+ - FilesystemInclude optionally allows copying a subset of the filesystem
+ workspace to the final image/tarball.
+ - AssociatedFilesystems enables users to build additional filesystems
+ together with the requested filesystem. This is helpful if we are building
+ companion filesystem images along with the requested filesystem.
+
+version 17.1.11:
+ - Reorganize code to remove unused and unsupported codepaths while generating
+   DRIVE OS QNX IFS and Power Safe QNX6 FS images.
+
+version 17.1.12:
+ - Add support to create spreadsheets containing the list of files copied by
+   CopyTarget.
+
+version 17.2.0:
+ - Add support for creating DTSI file with hash values for files in the FS.
+   The path or the file name of the DTSI file is provided by the
+   new "FileHashListDTS" Build-FS config parameter.
+
+version 17.2.1:
+ - Improve error detection of input CONFIG files
+ - Fix bug of QNX XFS image size ambiguity with
+   custom header file imports.
+
+version 17.3.0:
+ - Add support for creating filesystems with digest values for verifying the
+   files in the FS. The path or the file name of the DTSI file is provided by
+   the new "DigestMetadataConfig" Build-FS config parameter. This replaces
+   the "FileHashListDTS" Build-FS config parameter.
+ - Add support for specifying the mount point of the filesystems using
+   the new "FSMountPointConfg" Build-FS config parameter.

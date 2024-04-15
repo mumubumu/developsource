@@ -1,0 +1,41 @@
+{
+    "Copyright": [
+        "# Copyright (c) 2022-2023, NVIDIA CORPORATION & AFFILIATES.",
+        "# All rights reserved.",
+        "#",
+        "# NVIDIA CORPORATION, its affiliates and its licensors retain all intellectual",
+        "# property and proprietary rights in and to this software, related",
+        "# documentation and any modifications thereto.  Any use, reproduction,",
+        "# disclosure or distribution of this software and related documentation",
+        "# without an express license agreement from NVIDIA CORPORATION or its",
+        "# affiliates is strictly prohibited."
+    ],
+    "OS": "linux",
+    "Output": "nvidia-driveos-build-fs-rfs-user",
+    "Base": "${BASE_DIR}/targetfs.img",
+    "FilesystemType": "",
+    "Mirrors": [],
+    "Users": {
+    },
+    "Groups": {
+    },
+    "Memberships": {
+    },
+    "PreInstalls": {
+    },
+    "CopyTargets": [
+    ],
+    "PostInstalls": {
+        "/etc/nvidia/run-once/nv-run-once-run-ldconfig": "target",
+        "/etc/nvidia/run-once/nv-run-once-run-depmod": "target"
+    },
+    "FilesystemCleanup": [
+    ],
+    "SELinux": {
+        "SetFiles": "${SELINUX_SETFILES_PATH}",
+        "PolicyFile": "${SELINUX_POLICY_PATH}",
+        "ContextFile": "${SELINUX_CONTEXT_PATH}"
+    },
+    "DebianPackages": [
+    ]
+}
