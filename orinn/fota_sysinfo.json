@@ -1,0 +1,10 @@
+{
+    "_comment_": "system info for fota",
+    "project": "iECU3.3",
+    "mpu": "orinn",
+    "layout": 2,
+    "dos": "6090",
+    "pie": "sw060",
+    "tag": 0,
+    "extra": "none"
+}
